@@ -1,0 +1,13 @@
+{
+  "name": "fathom-landing",
+  "version": "1.0.0",
+  "description": "FATHOM — Strategic depth agency landing page",
+  "private": true,
+  "scripts": {
+    "dev": "npx serve . -l 3001",
+    "deploy": "vercel --prod"
+  },
+  "keywords": ["landing-page", "marketing", "agency"],
+  "author": "FATHOM",
+  "license": "MIT"
+}

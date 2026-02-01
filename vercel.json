@@ -1,0 +1,28 @@
+{
+  "version": 2,
+  "name": "fathom-landing",
+  "builds": [
+    {
+      "src": "index.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "api/**/*.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
+  "env": {
+    "TELEGRAM_BOT_TOKEN": "@telegram-bot-token",
+    "TELEGRAM_CHAT_ID": "@telegram-chat-id"
+  }
+}

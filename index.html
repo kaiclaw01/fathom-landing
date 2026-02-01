@@ -1,0 +1,1745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FATHOM — We Go Deeper</title>
+    <meta name="description" content="Most agencies scratch the surface. We dive to depths they can't reach.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --surface: #87CEEB;
+            --shallow: #4A90A4;
+            --mid: #1E5F74;
+            --deep: #0B3142;
+            --abyss: #030B10;
+            --glow: #00F5D4;
+            --glow-warm: #FFC857;
+            --white: #FFFFFF;
+            --font: 'Space Grotesk', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--abyss);
+            color: var(--white);
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--glow);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transition: transform 0.1s ease, border-color 0.3s ease;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-dot {
+            width: 4px;
+            height: 4px;
+            background: var(--glow);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10001;
+        }
+
+        .cursor.hover {
+            transform: scale(2);
+            border-color: var(--glow-warm);
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 24px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.8s ease, padding 0.3s ease;
+            background-color: transparent;
+        }
+
+        .nav.scrolled {
+            padding: 16px 40px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--white);
+        }
+
+        .logo-mark {
+            width: 36px;
+            height: 36px;
+            position: relative;
+        }
+
+        .logo-mark svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .nav-cta {
+            padding: 10px 24px;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: var(--white);
+            font-family: var(--font);
+            font-size: 0.8125rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: none;
+        }
+
+        .nav-cta:hover {
+            background: var(--white);
+            color: var(--abyss);
+        }
+
+        /* Depth Indicator */
+        .depth-indicator {
+            position: fixed;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .depth-line {
+            width: 2px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            position: relative;
+            border-radius: 2px;
+        }
+
+        .depth-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--glow);
+            border-radius: 2px;
+            transition: height 0.3s ease;
+            box-shadow: 0 0 20px var(--glow);
+        }
+
+        .depth-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--glow);
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            margin-top: 16px;
+        }
+
+        .depth-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--glow);
+            text-shadow: 0 0 30px var(--glow);
+        }
+
+        /* Scroll Container */
+        .scroll-container {
+            position: relative;
+        }
+
+        /* Bubbles */
+        .bubbles {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .bubble {
+            position: absolute;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: rise linear infinite;
+        }
+
+        @keyframes rise {
+            0% {
+                transform: translateY(100vh) scale(1);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        /* Bioluminescence Particles */
+        .particles {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .particles.active {
+            opacity: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--glow);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--glow), 0 0 20px var(--glow);
+            animation: drift 8s ease-in-out infinite;
+        }
+
+        @keyframes drift {
+            0%, 100% {
+                transform: translate(0, 0);
+                opacity: 0.3;
+            }
+            25% {
+                transform: translate(20px, -30px);
+                opacity: 1;
+            }
+            50% {
+                transform: translate(-10px, -20px);
+                opacity: 0.5;
+            }
+            75% {
+                transform: translate(15px, -40px);
+                opacity: 0.8;
+            }
+        }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 60px 40px;
+            transition: background 0.5s ease;
+        }
+
+        .section-content {
+            max-width: 1000px;
+            width: 100%;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Typography */
+        .headline-massive {
+            font-size: clamp(4rem, 15vw, 12rem);
+            font-weight: 700;
+            line-height: 0.9;
+            letter-spacing: -0.04em;
+        }
+
+        .headline-large {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: -0.03em;
+        }
+
+        .headline-medium {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .text-large {
+            font-size: clamp(1.125rem, 2vw, 1.5rem);
+            line-height: 1.6;
+            opacity: 0.8;
+        }
+
+        .text-glow {
+            color: var(--glow);
+            text-shadow: 0 0 40px var(--glow);
+        }
+
+        .text-warm {
+            color: var(--glow-warm);
+            text-shadow: 0 0 40px var(--glow-warm);
+        }
+
+        /* Section: Surface */
+        .surface {
+            background: linear-gradient(180deg, var(--surface) 0%, var(--shallow) 100%);
+        }
+
+        .surface-content {
+            text-align: center;
+        }
+
+        .surface h1 {
+            margin-bottom: 24px;
+        }
+
+        .surface h1 span {
+            display: block;
+        }
+
+        .surface .subhead {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            opacity: 0.7;
+            max-width: 500px;
+            margin: 0 auto 60px;
+        }
+
+        .scroll-prompt {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            animation: bob 2s ease-in-out infinite;
+            cursor: pointer;
+        }
+
+        .scroll-prompt span {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            opacity: 0.6;
+        }
+
+        .scroll-arrow {
+            width: 24px;
+            height: 40px;
+            border: 2px solid rgba(255,255,255,0.5);
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .scroll-arrow::before {
+            content: '';
+            width: 4px;
+            height: 8px;
+            background: white;
+            border-radius: 2px;
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: scrollDown 1.5s ease-in-out infinite;
+        }
+
+        @keyframes scrollDown {
+            0%, 100% { top: 8px; opacity: 1; }
+            50% { top: 20px; opacity: 0.3; }
+        }
+
+        @keyframes bob {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+
+        /* Section: Descent */
+        .descent {
+            background: linear-gradient(180deg, var(--shallow) 0%, var(--mid) 100%);
+        }
+
+        .depth-reveal {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .depth-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .problem-text {
+            font-size: clamp(1.25rem, 3vw, 2rem);
+            line-height: 1.5;
+            max-width: 800px;
+        }
+
+        .problem-text strong {
+            color: var(--glow-warm);
+        }
+
+        /* Section: The Layers */
+        .layer {
+            display: flex;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .layer-number {
+            font-size: clamp(6rem, 15vw, 10rem);
+            font-weight: 700;
+            opacity: 0.1;
+            line-height: 1;
+        }
+
+        .layer-content h2 {
+            margin-bottom: 16px;
+        }
+
+        .layer-content p {
+            opacity: 0.7;
+            max-width: 500px;
+            line-height: 1.7;
+        }
+
+        .layer-tag {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(0, 245, 212, 0.1);
+            border: 1px solid rgba(0, 245, 212, 0.3);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--glow);
+            margin-bottom: 20px;
+        }
+
+        /* Depth Sections */
+        .depth-50 {
+            background: linear-gradient(180deg, var(--mid) 0%, var(--deep) 100%);
+        }
+
+        .depth-100 {
+            background: linear-gradient(180deg, var(--deep) 0%, #061520 100%);
+        }
+
+        .depth-200 {
+            background: linear-gradient(180deg, #061520 0%, #040D12 100%);
+        }
+
+        .depth-500 {
+            background: linear-gradient(180deg, #040D12 0%, var(--abyss) 100%);
+        }
+
+        /* Abyss Section */
+        .abyss {
+            background: var(--abyss);
+            text-align: center;
+            min-height: 120vh;
+        }
+
+        .abyss-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .abyss h2 {
+            background: linear-gradient(180deg, var(--glow) 0%, var(--glow-warm) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .abyss p {
+            max-width: 600px;
+            opacity: 0.7;
+            font-size: 1.25rem;
+            line-height: 1.7;
+        }
+
+        /* CTA */
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 40px;
+            background: transparent;
+            border: 2px solid var(--glow);
+            color: var(--glow);
+            font-family: var(--font);
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: none;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            text-decoration: none;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--glow);
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .cta-button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-button:hover {
+            color: var(--abyss);
+            box-shadow: 0 0 60px var(--glow);
+        }
+
+        .cta-button:hover::before {
+            transform: translateY(0);
+        }
+
+        .cta-button svg {
+            width: 20px;
+            height: 20px;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover svg {
+            transform: translateX(5px);
+        }
+
+        /* Creature */
+        .creature {
+            position: fixed;
+            bottom: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+            height: 400px;
+            pointer-events: none;
+            z-index: 5;
+            opacity: 0;
+            transition: all 1s ease;
+        }
+
+        .creature.visible {
+            bottom: -100px;
+            opacity: 1;
+        }
+
+        .creature-glow {
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, var(--glow) 0%, transparent 70%);
+            opacity: 0.3;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.2); opacity: 0.5; }
+        }
+
+        /* Stats Row */
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            margin-top: 80px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            color: var(--glow);
+            text-shadow: 0 0 40px var(--glow);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.5;
+            margin-top: 8px;
+        }
+
+        /* Light Rays */
+        .light-rays {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 50vh;
+            background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 1;
+            transition: opacity 1s ease;
+        }
+
+        .light-rays.hidden {
+            opacity: 0;
+        }
+
+        /* Jellyfish */
+        .jellyfish {
+            position: fixed;
+            width: 60px;
+            height: 80px;
+            pointer-events: none;
+            z-index: 3;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .jellyfish.visible {
+            opacity: 1;
+        }
+
+        .jellyfish-body {
+            width: 60px;
+            height: 40px;
+            background: radial-gradient(ellipse at top, rgba(0, 245, 212, 0.4) 0%, rgba(0, 245, 212, 0.1) 100%);
+            border-radius: 50% 50% 40% 40%;
+            position: relative;
+            animation: jellyPulse 2s ease-in-out infinite;
+        }
+
+        .jellyfish-tentacles {
+            display: flex;
+            justify-content: space-around;
+            padding: 0 10px;
+        }
+
+        .tentacle {
+            width: 2px;
+            height: 40px;
+            background: linear-gradient(180deg, rgba(0, 245, 212, 0.4) 0%, transparent 100%);
+            animation: sway 3s ease-in-out infinite;
+        }
+
+        .tentacle:nth-child(2) { animation-delay: 0.2s; height: 50px; }
+        .tentacle:nth-child(3) { animation-delay: 0.4s; height: 35px; }
+        .tentacle:nth-child(4) { animation-delay: 0.1s; height: 45px; }
+        .tentacle:nth-child(5) { animation-delay: 0.3s; height: 38px; }
+
+        @keyframes jellyPulse {
+            0%, 100% { transform: scaleX(1) scaleY(1); }
+            50% { transform: scaleX(1.1) scaleY(0.9); }
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: translateX(0) skewX(0deg); }
+            25% { transform: translateX(5px) skewX(5deg); }
+            75% { transform: translateX(-5px) skewX(-5deg); }
+        }
+
+        .jelly-1 { top: 30%; left: 10%; animation: floatJelly 15s ease-in-out infinite; }
+        .jelly-2 { top: 50%; right: 15%; animation: floatJelly 18s ease-in-out infinite reverse; }
+        .jelly-3 { top: 70%; left: 20%; animation: floatJelly 20s ease-in-out infinite; animation-delay: -5s; }
+
+        @keyframes floatJelly {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(30px, -50px) rotate(5deg); }
+            50% { transform: translate(-20px, -30px) rotate(-3deg); }
+            75% { transform: translate(10px, -60px) rotate(2deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .depth-indicator {
+                right: 20px;
+            }
+            
+            .depth-line {
+                height: 120px;
+            }
+
+            .layer {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .layer-number {
+                font-size: 5rem;
+            }
+
+            .stats-row {
+                gap: 40px;
+            }
+
+            section {
+                padding: 40px 20px;
+            }
+
+            .nav {
+                padding: 16px 20px;
+            }
+        }
+
+        /* ============================================
+           ONBOARDING MODAL
+        ============================================ */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(3, 11, 16, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-particles {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .modal-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--glow);
+            border-radius: 50%;
+            opacity: 0.3;
+            box-shadow: 0 0 10px var(--glow);
+            animation: modalDrift 10s ease-in-out infinite;
+        }
+
+        @keyframes modalDrift {
+            0%, 100% { transform: translate(0, 0); opacity: 0.2; }
+            50% { transform: translate(30px, -30px); opacity: 0.5; }
+        }
+
+        .modal {
+            background: linear-gradient(180deg, rgba(11, 49, 66, 0.8) 0%, rgba(3, 11, 16, 0.9) 100%);
+            border: 1px solid rgba(0, 245, 212, 0.2);
+            border-radius: 24px;
+            padding: 60px;
+            max-width: 560px;
+            width: 90%;
+            position: relative;
+            transform: translateY(40px) scale(0.95);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 0 100px rgba(0, 245, 212, 0.1);
+        }
+
+        .modal-overlay.active .modal {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            color: var(--white);
+            cursor: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 1.25rem;
+        }
+
+        .modal-close:hover {
+            border-color: var(--glow);
+            color: var(--glow);
+        }
+
+        .modal-step {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .modal-step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 32px;
+            background: rgba(0, 245, 212, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            animation: iconPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes iconPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(0, 245, 212, 0.3); }
+            50% { box-shadow: 0 0 0 20px rgba(0, 245, 212, 0); }
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 12px;
+            background: linear-gradient(180deg, var(--white) 0%, var(--glow) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .modal-subtitle {
+            text-align: center;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 40px;
+            font-size: 1.0625rem;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--glow);
+            margin-bottom: 10px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            color: var(--white);
+            font-family: var(--font);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            cursor: none;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--glow);
+            background: rgba(0, 245, 212, 0.05);
+            box-shadow: 0 0 20px rgba(0, 245, 212, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: rgba(255,255,255,0.3);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .form-option {
+            padding: 16px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            cursor: none;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .form-option:hover {
+            border-color: rgba(0, 245, 212, 0.3);
+            background: rgba(0, 245, 212, 0.05);
+        }
+
+        .form-option.selected {
+            border-color: var(--glow);
+            background: rgba(0, 245, 212, 0.1);
+        }
+
+        .form-option-icon {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .form-option-text {
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 16px;
+            margin-top: 40px;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 16px 24px;
+            border-radius: 12px;
+            font-family: var(--font);
+            font-size: 0.9375rem;
+            font-weight: 600;
+            cursor: none;
+            transition: all 0.3s ease;
+        }
+
+        .modal-btn-secondary {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: var(--white);
+        }
+
+        .modal-btn-secondary:hover {
+            border-color: var(--white);
+        }
+
+        .modal-btn-primary {
+            background: var(--glow);
+            border: none;
+            color: var(--abyss);
+        }
+
+        .modal-btn-primary:hover {
+            box-shadow: 0 0 30px rgba(0, 245, 212, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .progress-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 32px;
+        }
+
+        .progress-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .progress-dot.active {
+            background: var(--glow);
+            box-shadow: 0 0 10px var(--glow);
+        }
+
+        .progress-dot.completed {
+            background: var(--glow);
+        }
+
+        /* Success State */
+        .success-checkmark {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 32px;
+            position: relative;
+        }
+
+        .success-checkmark svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .success-circle {
+            stroke: var(--glow);
+            stroke-width: 2;
+            fill: none;
+            stroke-dasharray: 314;
+            stroke-dashoffset: 314;
+            animation: drawCircle 0.6s ease forwards;
+        }
+
+        .success-check {
+            stroke: var(--glow);
+            stroke-width: 3;
+            fill: none;
+            stroke-dasharray: 50;
+            stroke-dashoffset: 50;
+            animation: drawCheck 0.4s ease 0.4s forwards;
+        }
+
+        @keyframes drawCircle {
+            to { stroke-dashoffset: 0; }
+        }
+
+        @keyframes drawCheck {
+            to { stroke-dashoffset: 0; }
+        }
+
+        .success-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 16px;
+            color: var(--glow);
+        }
+
+        .success-message {
+            text-align: center;
+            color: rgba(255,255,255,0.7);
+            font-size: 1.125rem;
+            line-height: 1.7;
+            margin-bottom: 40px;
+        }
+
+        .success-detail {
+            background: rgba(0, 245, 212, 0.1);
+            border: 1px solid rgba(0, 245, 212, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .success-detail-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--glow);
+            margin-bottom: 8px;
+        }
+
+        .success-detail-value {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-dot"></div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <a href="#" class="logo">
+            <div class="logo-mark">
+                <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="18" cy="6" r="4" fill="#00F5D4"/>
+                    <circle cx="18" cy="18" r="3" fill="#00F5D4" opacity="0.6"/>
+                    <circle cx="18" cy="28" r="2" fill="#00F5D4" opacity="0.3"/>
+                    <path d="M18 10 L18 32" stroke="url(#logoGrad)" stroke-width="1.5" stroke-linecap="round"/>
+                    <defs>
+                        <linearGradient id="logoGrad" x1="18" y1="10" x2="18" y2="32" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#00F5D4"/>
+                            <stop offset="100%" stop-color="#00F5D4" stop-opacity="0"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            <span class="logo-text">Fathom</span>
+        </a>
+        <a href="#abyss" class="nav-cta">Begin</a>
+    </nav>
+
+    <!-- Light Rays (Surface) -->
+    <div class="light-rays"></div>
+
+    <!-- Bubbles -->
+    <div class="bubbles"></div>
+
+    <!-- Bioluminescence Particles -->
+    <div class="particles"></div>
+
+    <!-- Jellyfish -->
+    <div class="jellyfish jelly-1">
+        <div class="jellyfish-body"></div>
+        <div class="jellyfish-tentacles">
+            <div class="tentacle"></div>
+            <div class="tentacle"></div>
+            <div class="tentacle"></div>
+            <div class="tentacle"></div>
+            <div class="tentacle"></div>
+        </div>
+    </div>
+    <div class="jellyfish jelly-2">
+        <div class="jellyfish-body"></div>
+        <div class="jellyfish-tentacles">
+            <div class="tentacle"></div>
+            <div class="tentacle"></div>
+            <div class="tentacle"></div>
+            <div class="tentacle"></div>
+            <div class="tentacle"></div>
+        </div>
+    </div>
+    <div class="jellyfish jelly-3">
+        <div class="jellyfish-body"></div>
+        <div class="jellyfish-tentacles">
+            <div class="tentacle"></div>
+            <div class="tentacle"></div>
+            <div class="tentacle"></div>
+            <div class="tentacle"></div>
+            <div class="tentacle"></div>
+        </div>
+    </div>
+
+    <!-- Depth Indicator -->
+    <div class="depth-indicator">
+        <div class="depth-number">0m</div>
+        <div class="depth-line">
+            <div class="depth-progress" style="height: 0%"></div>
+        </div>
+        <div class="depth-label">Depth</div>
+    </div>
+
+    <!-- Creature Glow (Abyss) -->
+    <div class="creature">
+        <div class="creature-glow"></div>
+    </div>
+
+    <div class="scroll-container">
+        <!-- Surface -->
+        <section class="surface" data-depth="0">
+            <div class="section-content surface-content">
+                <h1 class="headline-massive">
+                    <span>GO</span>
+                    <span>DEEPER</span>
+                </h1>
+                <p class="subhead">Most agencies scratch the surface. We dive to depths they can't reach.</p>
+                
+                <div class="scroll-prompt">
+                    <span>Begin descent</span>
+                    <div class="scroll-arrow"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Problem -->
+        <section class="descent" data-depth="25">
+            <div class="section-content">
+                <div class="depth-reveal">
+                    <p class="problem-text">
+                        Every agency promises the moon.<br><br>
+                        They run the same playbook. Same tools. Same surface-level tactics.<br><br>
+                        <strong>You've tried it. It doesn't work.</strong><br><br>
+                        Real growth requires going where others won't.<br>
+                        Into the uncomfortable. The complex. The deep.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 50m - Technical -->
+        <section class="depth-50" data-depth="50">
+            <div class="section-content">
+                <div class="layer depth-reveal">
+                    <div class="layer-number">50m</div>
+                    <div class="layer-content">
+                        <div class="layer-tag">Technical Foundation</div>
+                        <h2 class="headline-medium">Where most agencies stop,<br>we're just getting started.</h2>
+                        <p>
+                            Core Web Vitals. Crawl optimization. Index management. Schema architecture. 
+                            The invisible infrastructure that separates page 1 from page 10.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 100m - Content -->
+        <section class="depth-100" data-depth="100">
+            <div class="section-content">
+                <div class="layer depth-reveal">
+                    <div class="layer-number">100m</div>
+                    <div class="layer-content">
+                        <div class="layer-tag">Content Architecture</div>
+                        <h2 class="headline-medium">Content that compounds.<br>Not content that disappears.</h2>
+                        <p>
+                            Topical authority mapping. Semantic clustering. E-E-A-T frameworks.
+                            Every piece builds toward an unassailable position.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 200m - Intelligence -->
+        <section class="depth-200" data-depth="200">
+            <div class="section-content">
+                <div class="layer depth-reveal">
+                    <div class="layer-number">200m</div>
+                    <div class="layer-content">
+                        <div class="layer-tag">Competitive Intelligence</div>
+                        <h2 class="headline-medium">We know what they'll do<br>before they do it.</h2>
+                        <p>
+                            Real-time competitor monitoring. Gap analysis. Counter-positioning.
+                            The intelligence advantage that lets you move faster.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 500m - Domination -->
+        <section class="depth-500" data-depth="500">
+            <div class="section-content">
+                <div class="layer depth-reveal">
+                    <div class="layer-number">500m</div>
+                    <div class="layer-content">
+                        <div class="layer-tag">Market Domination</div>
+                        <h2 class="headline-medium text-glow">This is where<br>competitors become irrelevant.</h2>
+                        <p>
+                            Full-spectrum authority. Multi-channel reinforcement. Market capture strategies.
+                            We don't aim for rankings. We aim for ownership.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Abyss - CTA -->
+        <section class="abyss" id="abyss" data-depth="1000">
+            <div class="section-content abyss-content depth-reveal">
+                <h2 class="headline-large">The Abyss</h2>
+                <p>
+                    This is where we operate. Where the pressure is highest. Where most can't survive.<br><br>
+                    But for those who can handle the depth—this is where empires are built.
+                </p>
+                
+                <button class="cta-button" id="openModal">
+                    <span>Ready to dive?</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                    </svg>
+                </button>
+
+                <div class="stats-row">
+                    <div class="stat">
+                        <div class="stat-value">500%</div>
+                        <div class="stat-label">Avg. Traffic Growth</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">47</div>
+                        <div class="stat-label">Page 1 Rankings</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">₹12Cr+</div>
+                        <div class="stat-label">Revenue Generated</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Onboarding Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-particles" id="modalParticles"></div>
+        
+        <div class="modal">
+            <button class="modal-close" id="modalClose">×</button>
+            
+            <!-- Step 1: Welcome -->
+            <div class="modal-step active" data-step="1">
+                <div class="modal-icon">🌊</div>
+                <h3 class="modal-title">Welcome to the Deep</h3>
+                <p class="modal-subtitle">You've made it further than most. Let's see if we're the right fit for each other.</p>
+                
+                <div class="form-group">
+                    <label class="form-label">Your Name</label>
+                    <input type="text" class="form-input" id="userName" placeholder="How should we call you?">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Company</label>
+                    <input type="text" class="form-input" id="userCompany" placeholder="Where do you work?">
+                </div>
+                
+                <div class="modal-actions">
+                    <button class="modal-btn modal-btn-primary" onclick="nextStep(2)">Continue the descent →</button>
+                </div>
+                
+                <div class="progress-dots">
+                    <div class="progress-dot active"></div>
+                    <div class="progress-dot"></div>
+                    <div class="progress-dot"></div>
+                    <div class="progress-dot"></div>
+                </div>
+            </div>
+            
+            <!-- Step 2: What do you need? -->
+            <div class="modal-step" data-step="2">
+                <div class="modal-icon">🎯</div>
+                <h3 class="modal-title">What brings you here?</h3>
+                <p class="modal-subtitle">Select what matters most to you right now.</p>
+                
+                <div class="form-options" id="needsOptions">
+                    <div class="form-option" data-value="seo">
+                        <div class="form-option-icon">🔍</div>
+                        <div class="form-option-text">SEO & Rankings</div>
+                    </div>
+                    <div class="form-option" data-value="content">
+                        <div class="form-option-icon">📝</div>
+                        <div class="form-option-text">Content Strategy</div>
+                    </div>
+                    <div class="form-option" data-value="growth">
+                        <div class="form-option-icon">📈</div>
+                        <div class="form-option-text">Traffic Growth</div>
+                    </div>
+                    <div class="form-option" data-value="domination">
+                        <div class="form-option-icon">👑</div>
+                        <div class="form-option-text">Market Domination</div>
+                    </div>
+                </div>
+                
+                <div class="modal-actions">
+                    <button class="modal-btn modal-btn-secondary" onclick="prevStep(1)">← Back</button>
+                    <button class="modal-btn modal-btn-primary" onclick="nextStep(3)">Continue →</button>
+                </div>
+                
+                <div class="progress-dots">
+                    <div class="progress-dot completed"></div>
+                    <div class="progress-dot active"></div>
+                    <div class="progress-dot"></div>
+                    <div class="progress-dot"></div>
+                </div>
+            </div>
+            
+            <!-- Step 3: Tell us more -->
+            <div class="modal-step" data-step="3">
+                <div class="modal-icon">💬</div>
+                <h3 class="modal-title">Tell us more</h3>
+                <p class="modal-subtitle">What's the biggest challenge you're facing right now?</p>
+                
+                <div class="form-group">
+                    <label class="form-label">Your Challenge</label>
+                    <textarea class="form-input form-textarea" id="userChallenge" placeholder="Be specific. The more we know, the better we can help..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Your Email</label>
+                    <input type="email" class="form-input" id="userEmail" placeholder="Where should we reach you?">
+                </div>
+                
+                <div class="modal-actions">
+                    <button class="modal-btn modal-btn-secondary" onclick="prevStep(2)">← Back</button>
+                    <button class="modal-btn modal-btn-primary" onclick="nextStep(4)">Submit →</button>
+                </div>
+                
+                <div class="progress-dots">
+                    <div class="progress-dot completed"></div>
+                    <div class="progress-dot completed"></div>
+                    <div class="progress-dot active"></div>
+                    <div class="progress-dot"></div>
+                </div>
+            </div>
+            
+            <!-- Step 4: Success -->
+            <div class="modal-step" data-step="4">
+                <div class="success-checkmark">
+                    <svg viewBox="0 0 100 100">
+                        <circle class="success-circle" cx="50" cy="50" r="45"/>
+                        <path class="success-check" d="M30 50 L45 65 L70 35"/>
+                    </svg>
+                </div>
+                <h3 class="success-title">You're in.</h3>
+                <p class="success-message">
+                    Welcome to the deep, <span id="confirmedName">friend</span>.<br>
+                    We'll be in touch within 24 hours to schedule your strategy session.
+                </p>
+                
+                <div class="success-detail">
+                    <div class="success-detail-label">What happens next</div>
+                    <div class="success-detail-value">We'll analyze your situation and come prepared with initial insights.</div>
+                </div>
+                
+                <div class="modal-actions">
+                    <button class="modal-btn modal-btn-primary" onclick="closeModal()" style="width: 100%;">Return to surface ↑</button>
+                </div>
+                
+                <div class="progress-dots">
+                    <div class="progress-dot completed"></div>
+                    <div class="progress-dot completed"></div>
+                    <div class="progress-dot completed"></div>
+                    <div class="progress-dot active"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorDot = document.querySelector('.cursor-dot');
+        
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursorDot.style.left = mouseX - 2 + 'px';
+            cursorDot.style.top = mouseY - 2 + 'px';
+        });
+
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.1;
+            cursorY += (mouseY - cursorY) * 0.1;
+            cursor.style.left = cursorX - 10 + 'px';
+            cursor.style.top = cursorY - 10 + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // Cursor hover effect
+        document.querySelectorAll('a, button, .cta-button, .form-option, .scroll-prompt').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+
+        // Generate Bubbles
+        const bubblesContainer = document.querySelector('.bubbles');
+        for (let i = 0; i < 20; i++) {
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+            const size = Math.random() * 20 + 5;
+            bubble.style.width = size + 'px';
+            bubble.style.height = size + 'px';
+            bubble.style.left = Math.random() * 100 + '%';
+            bubble.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            bubble.style.animationDelay = Math.random() * 10 + 's';
+            bubblesContainer.appendChild(bubble);
+        }
+
+        // Generate Particles
+        const particlesContainer = document.querySelector('.particles');
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 8 + 's';
+            particle.style.animationDuration = (Math.random() * 4 + 6) + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        // Generate Modal Particles
+        const modalParticles = document.getElementById('modalParticles');
+        for (let i = 0; i < 30; i++) {
+            const p = document.createElement('div');
+            p.className = 'modal-particle';
+            p.style.left = Math.random() * 100 + '%';
+            p.style.top = Math.random() * 100 + '%';
+            p.style.animationDelay = Math.random() * 10 + 's';
+            p.style.animationDuration = (Math.random() * 5 + 8) + 's';
+            modalParticles.appendChild(p);
+        }
+
+        // Scroll Effects
+        const depthProgress = document.querySelector('.depth-progress');
+        const depthNumber = document.querySelector('.depth-number');
+        const lightRays = document.querySelector('.light-rays');
+        const particles = document.querySelector('.particles');
+        const creature = document.querySelector('.creature');
+        const jellyfish = document.querySelectorAll('.jellyfish');
+        const nav = document.getElementById('nav');
+        const reveals = document.querySelectorAll('.depth-reveal');
+
+        // Color stops for nav background (matching section gradients)
+        const depthColors = [
+            { pos: 0.00, color: [135, 206, 235] },  // surface #87CEEB
+            { pos: 0.10, color: [74, 144, 164] },   // shallow #4A90A4
+            { pos: 0.25, color: [30, 95, 116] },    // mid #1E5F74
+            { pos: 0.40, color: [11, 49, 66] },     // deep #0B3142
+            { pos: 0.55, color: [6, 21, 32] },      // deeper #061520
+            { pos: 0.70, color: [4, 13, 18] },      // darker #040D12
+            { pos: 0.85, color: [3, 11, 16] },      // abyss #030B10
+            { pos: 1.00, color: [3, 11, 16] }       // abyss #030B10
+        ];
+
+        function interpolateColor(percent) {
+            // Find the two color stops we're between
+            let lower = depthColors[0];
+            let upper = depthColors[depthColors.length - 1];
+            
+            for (let i = 0; i < depthColors.length - 1; i++) {
+                if (percent >= depthColors[i].pos && percent <= depthColors[i + 1].pos) {
+                    lower = depthColors[i];
+                    upper = depthColors[i + 1];
+                    break;
+                }
+            }
+            
+            // Calculate interpolation factor
+            const range = upper.pos - lower.pos;
+            const factor = range === 0 ? 0 : (percent - lower.pos) / range;
+            
+            // Interpolate RGB values
+            const r = Math.round(lower.color[0] + (upper.color[0] - lower.color[0]) * factor);
+            const g = Math.round(lower.color[1] + (upper.color[1] - lower.color[1]) * factor);
+            const b = Math.round(lower.color[2] + (upper.color[2] - lower.color[2]) * factor);
+            
+            return `rgb(${r}, ${g}, ${b})`;
+        }
+
+        function updateScroll() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = scrollTop / docHeight;
+            
+            // Depth indicator
+            depthProgress.style.height = (scrollPercent * 100) + '%';
+            const currentDepth = Math.round(scrollPercent * 1000);
+            depthNumber.textContent = currentDepth + 'm';
+
+            // Adaptive nav background - blends with current depth
+            if (scrollTop > 50) {
+                nav.classList.add('scrolled');
+                const navColor = interpolateColor(scrollPercent);
+                nav.style.backgroundColor = navColor;
+            } else {
+                nav.classList.remove('scrolled');
+                nav.style.backgroundColor = 'transparent';
+            }
+
+            // Light rays fade
+            if (scrollPercent > 0.1) {
+                lightRays.classList.add('hidden');
+            } else {
+                lightRays.classList.remove('hidden');
+            }
+
+            // Particles appear at depth
+            if (scrollPercent > 0.4) {
+                particles.classList.add('active');
+            } else {
+                particles.classList.remove('active');
+            }
+
+            // Creature appears in abyss
+            if (scrollPercent > 0.85) {
+                creature.classList.add('visible');
+            } else {
+                creature.classList.remove('visible');
+            }
+
+            // Jellyfish visibility
+            if (scrollPercent > 0.3 && scrollPercent < 0.8) {
+                jellyfish.forEach(j => j.classList.add('visible'));
+            } else {
+                jellyfish.forEach(j => j.classList.remove('visible'));
+            }
+
+            // Bubble opacity based on depth
+            const bubbleOpacity = Math.max(0, 1 - scrollPercent * 2);
+            bubblesContainer.style.opacity = bubbleOpacity;
+
+            // Reveal elements
+            reveals.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.8) {
+                    el.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateScroll);
+        window.addEventListener('load', updateScroll);
+
+        // Smooth scroll
+        document.querySelector('.scroll-prompt').addEventListener('click', () => {
+            window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+        });
+
+        // Parallax for layer numbers
+        window.addEventListener('scroll', () => {
+            document.querySelectorAll('.layer-number').forEach(num => {
+                const rect = num.getBoundingClientRect();
+                const offset = (rect.top - window.innerHeight / 2) * 0.1;
+                num.style.transform = `translateY(${offset}px)`;
+            });
+        });
+
+        // ============================================
+        // MODAL LOGIC
+        // ============================================
+        const modalOverlay = document.getElementById('modalOverlay');
+        const openModalBtn = document.getElementById('openModal');
+        const closeModalBtn = document.getElementById('modalClose');
+        let currentStep = 1;
+        let selectedNeeds = [];
+
+        // Open modal
+        openModalBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Close modal
+        closeModalBtn.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) closeModal();
+        });
+
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+            // Reset to step 1 after animation
+            setTimeout(() => {
+                showStep(1);
+            }, 500);
+        }
+
+        // Step navigation
+        function showStep(step) {
+            document.querySelectorAll('.modal-step').forEach(s => s.classList.remove('active'));
+            document.querySelector(`.modal-step[data-step="${step}"]`).classList.add('active');
+            currentStep = step;
+        }
+
+        async function nextStep(step) {
+            // Validation
+            if (currentStep === 1) {
+                const name = document.getElementById('userName').value.trim();
+                if (!name) {
+                    document.getElementById('userName').focus();
+                    return;
+                }
+            }
+            
+            if (currentStep === 3) {
+                const email = document.getElementById('userEmail').value.trim();
+                if (!email || !email.includes('@')) {
+                    document.getElementById('userEmail').focus();
+                    return;
+                }
+                
+                // Set confirmed name
+                const name = document.getElementById('userName').value.trim() || 'friend';
+                document.getElementById('confirmedName').textContent = name;
+                
+                // Submit form data to API
+                try {
+                    const formData = {
+                        name: document.getElementById('userName').value.trim(),
+                        company: document.getElementById('userCompany').value.trim(),
+                        needs: selectedNeeds,
+                        challenge: document.getElementById('userChallenge').value.trim(),
+                        email: email
+                    };
+                    
+                    const response = await fetch('/api/submit', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(formData)
+                    });
+                    
+                    if (!response.ok) {
+                        console.error('Submission failed');
+                    }
+                } catch (error) {
+                    console.error('Submission error:', error);
+                    // Continue anyway - don't block the user
+                }
+            }
+            
+            showStep(step);
+        }
+
+        function prevStep(step) {
+            showStep(step);
+        }
+
+        // Form options selection
+        document.querySelectorAll('.form-option').forEach(option => {
+            option.addEventListener('click', () => {
+                option.classList.toggle('selected');
+                const value = option.dataset.value;
+                if (selectedNeeds.includes(value)) {
+                    selectedNeeds = selectedNeeds.filter(n => n !== value);
+                } else {
+                    selectedNeeds.push(value);
+                }
+            });
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
