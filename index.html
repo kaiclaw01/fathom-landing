@@ -3,12 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FATHOM — We Go Deeper</title>
-    <meta name="description" content="Most agencies scratch the surface. We dive to depths they can't reach.">
+    <title>FATHOM - Elite SEO & Digital Marketing Agency | 500% Traffic Growth</title>
+    <meta name="description" content="FATHOM is an elite SEO & digital marketing agency delivering 500% average traffic growth. We go deeper - from Core Web Vitals to market domination. Begin your descent today.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://fathom-landing.vercel.app/">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="FATHOM - Elite SEO & Marketing Agency">
+    <meta property="og:description" content="Most agencies scratch the surface. We dive to depths they can't reach. 500% avg traffic growth.">
+    <meta property="og:image" content="https://fathom-landing.vercel.app/og-image.jpg">
+    <meta property="og:url" content="https://fathom-landing.vercel.app/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="FATHOM">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="FATHOM - We Go Deeper">
+    <meta name="twitter:description" content="Elite SEO agency delivering 500% avg traffic growth. We dive deeper than surface-level tactics.">
+    <meta name="twitter:image" content="https://fathom-landing.vercel.app/og-image.jpg">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -38,7 +61,7 @@
             background: var(--abyss);
             color: var(--white);
             overflow-x: hidden;
-            cursor: none;
+            /* cursor: none; */ /* Removed for accessibility */
         }
 
         /* Custom Cursor */
@@ -1083,6 +1106,23 @@
         .success-detail-value {
             font-size: 1.125rem;
             font-weight: 600;
+        }
+
+        /* Reduced Motion Support for Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            /* Disable specific animations */
+            .bubble,
+            .particle,
+            .jellyfish,
+            .creature-glow {
+                animation: none !important;
+            }
         }
     </style>
 </head>
