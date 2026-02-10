@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About FATHOM | Building SEO Strategy in Public</title>
+    <meta name="description" content="Most agencies hide their process. We're building FATHOM in public—sharing real data, transparent pricing, and honest lessons. See how we go deeper.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://thefathom.agency/about">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="About FATHOM | Building SEO Strategy in Public">
+    <meta property="og:description" content="Building an elite SEO agency in public. Real data, transparent pricing, honest lessons.">
+    <meta property="og:image" content="https://thefathom.agency/og-image.jpg">
+    <meta property="og:url" content="https://thefathom.agency/about">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="About FATHOM">
+    <meta name="twitter:description" content="Building an elite SEO agency in public. Real data, transparent pricing, honest lessons.">
+    <meta name="twitter:image" content="https://thefathom.agency/og-image.jpg">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "FATHOM Agency",
+        "alternateName": "FATHOM",
+        "url": "https://thefathom.agency",
+        "logo": "https://thefathom.agency/og-image.jpg",
+        "description": "Elite SEO & digital marketing agency building in public. Strategic depth that drives real revenue.",
+        "foundingDate": "2026-01",
+        "slogan": "Most agencies scratch the surface. We dive to depths they can't reach.",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "Business Inquiries",
+            "email": "hello@thefathom.agency"
+        },
+        "sameAs": []
+    }
+    </script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --surface: #87CEEB;
+            --shallow: #4A90A4;
+            --mid: #1E5F74;
+            --deep: #0B3142;
+            --abyss: #030B10;
+            --glow: #00F5D4;
+            --glow-warm: #FFC857;
+            --white: #FFFFFF;
+            --font: 'Space Grotesk', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--abyss);
+            color: var(--white);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 24px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(3, 11, 16, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 245, 212, 0.1);
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: 0.15em;
+        }
+
+        .nav-logo:hover {
+            color: var(--glow);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.05em;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--glow);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 160px 40px 100px;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(180deg, var(--deep) 0%, var(--abyss) 100%);
+        }
+
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(0, 245, 212, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 7vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 24px;
+            font-weight: 700;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.125rem, 2vw, 1.5rem);
+            opacity: 0.8;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .glow-text {
+            color: var(--glow);
+            text-shadow: 0 0 40px var(--glow);
+        }
+
+        /* Story Section */
+        .story-section {
+            padding: 80px 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .story-section h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .story-section p {
+            font-size: 1.125rem;
+            opacity: 0.9;
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+
+        .story-section strong {
+            color: var(--glow);
+            font-weight: 700;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(11, 49, 66, 0.4) 0%, rgba(3, 11, 16, 0.6) 100%);
+            border-left: 4px solid var(--glow);
+            padding: 32px;
+            margin: 48px 0;
+            border-radius: 8px;
+        }
+
+        .highlight-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            color: var(--glow);
+        }
+
+        .highlight-box p {
+            margin-bottom: 16px;
+        }
+
+        .highlight-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .highlight-box li {
+            padding-left: 28px;
+            position: relative;
+            margin-bottom: 12px;
+            opacity: 0.9;
+        }
+
+        .highlight-box li:before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--glow);
+            font-weight: 700;
+        }
+
+        /* Philosophy Section */
+        .philosophy-section {
+            padding: 100px 40px;
+            background: linear-gradient(180deg, var(--abyss) 0%, var(--deep) 100%);
+        }
+
+        .philosophy-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 60px;
+        }
+
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 48px;
+        }
+
+        .philosophy-item {
+            background: rgba(11, 49, 66, 0.3);
+            border: 1px solid rgba(0, 245, 212, 0.15);
+            border-radius: 16px;
+            padding: 40px;
+            transition: all 0.4s ease;
+        }
+
+        .philosophy-item:hover {
+            border-color: var(--glow);
+            box-shadow: 0 20px 60px rgba(0, 245, 212, 0.2);
+            transform: translateY(-4px);
+        }
+
+        .philosophy-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--glow);
+            opacity: 0.3;
+            margin-bottom: 16px;
+            line-height: 1;
+        }
+
+        .philosophy-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            color: var(--glow);
+        }
+
+        .philosophy-item p {
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+
+        /* Values Section */
+        .values-section {
+            padding: 80px 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .values-grid {
+            display: grid;
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .value-item {
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+        }
+
+        .value-icon {
+            font-size: 2.5rem;
+            flex-shrink: 0;
+            width: 60px;
+            text-align: center;
+        }
+
+        .value-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            color: var(--white);
+        }
+
+        .value-content p {
+            opacity: 0.9;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        /* Journey Section */
+        .journey-section {
+            padding: 100px 40px;
+            background: linear-gradient(180deg, var(--deep) 0%, var(--abyss) 100%);
+        }
+
+        .journey-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+            margin-top: 60px;
+        }
+
+        .timeline:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--glow) 0%, transparent 100%);
+        }
+
+        .timeline-item {
+            margin-bottom: 48px;
+            position: relative;
+        }
+
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -45px;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--glow);
+            box-shadow: 0 0 20px var(--glow);
+        }
+
+        .timeline-date {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--glow);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .timeline-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .timeline-description {
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 40px;
+            text-align: center;
+            background: var(--abyss);
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 24px;
+            background: linear-gradient(90deg, var(--glow) 0%, var(--glow-warm) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta-content p {
+            font-size: 1.25rem;
+            opacity: 0.8;
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 20px 48px;
+            background: var(--glow);
+            color: var(--abyss);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.125rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            margin: 0 8px 16px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0, 245, 212, 0.4);
+        }
+
+        .cta-button-secondary {
+            background: transparent;
+            border: 2px solid var(--glow);
+            color: var(--glow);
+        }
+
+        .cta-button-secondary:hover {
+            background: var(--glow);
+            color: var(--abyss);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav {
+                padding: 16px 20px;
+            }
+
+            .nav-links {
+                gap: 16px;
+                font-size: 0.85rem;
+            }
+
+            .hero {
+                padding: 120px 20px 80px;
+            }
+
+            .story-section {
+                padding: 60px 20px;
+            }
+
+            .philosophy-section {
+                padding: 80px 20px;
+            }
+
+            .philosophy-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .values-section {
+                padding: 60px 20px;
+            }
+
+            .value-item {
+                flex-direction: column;
+            }
+
+            .journey-section {
+                padding: 80px 20px;
+            }
+
+            .cta-section {
+                padding: 80px 20px;
+            }
+
+            .cta-button {
+                display: block;
+                margin: 0 0 16px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="/" class="nav-logo">FATHOM</a>
+        <div class="nav-links">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/blog.html" class="nav-link">Blog</a>
+            <a href="/services.html" class="nav-link">Services</a>
+            <a href="/pricing.html" class="nav-link">Pricing</a>
+            <a href="/about.html" class="nav-link" style="color: var(--glow);">About</a>
+            <a href="/process.html" class="nav-link">Process</a>
+            <a href="/contact.html" class="nav-link">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1><span class="glow-text">The Wake-Up Call</span></h1>
+            <p class="hero-subtitle">2025. Another "SEO expert" promised the moon and delivered mediocrity. For the hundredth time, a founder reached out: "We paid ₹2 lakhs a month for six months. Got a fancy dashboard, lots of jargon, and zero revenue. What went wrong?"</p>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="story-section">
+        <h2>Why FATHOM Exists</h2>
+        
+        <p>The answer was painfully simple: <strong>Most agencies don't actually do SEO. They do SEO theater.</strong></p>
+        
+        <p>Surface-level audits. Template strategies. Content that checks boxes but moves no needles. They optimize for billable hours, not business outcomes. They sell dashboards showing "progress" while competitors eat your lunch.</p>
+        
+        <p><strong>That's when we decided to build something different.</strong></p>
+        
+        <p>Not another agency promising magic. A strategic partner that goes deeper than anyone else—and proves it by building in public.</p>
+
+        <div class="highlight-box">
+            <h3>The Problem We Saw</h3>
+            <p><strong>The SEO industry is broken:</strong></p>
+            <ul>
+                <li>Agencies hide their methods behind "proprietary" nonsense</li>
+                <li>Pricing is opaque, designed to extract maximum budget</li>
+                <li>Consultants sell generic advice from outdated playbooks</li>
+                <li>Results are vague ("increased visibility!") instead of revenue-focused</li>
+                <li>No one shows their own work—they just tell you to trust them</li>
+            </ul>
+        </div>
+
+        <p>Meanwhile, businesses suffer. Startups waste precious runway on SEO that never pays off. Growing companies hit traffic plateaus they can't break through. Enterprises get trapped in massive retainers delivering minimal impact.</p>
+
+        <p><strong>We got tired of watching good companies get bad SEO.</strong></p>
+
+        <h2 style="margin-top: 60px; text-align: center;">Our Answer: Go Deeper</h2>
+        
+        <p><strong>FATHOM isn't about scratching the surface. It's about engineering market domination.</strong></p>
+        
+        <p>While competitors optimize meta tags, we're building competitive moats. While they chase rankings, we're capturing markets. While they deliver reports, we're driving revenue.</p>
+        
+        <p>But here's the kicker: <strong>We prove it on ourselves first.</strong></p>
+    </section>
+
+    <!-- Building in Public -->
+    <section class="story-section" style="background: linear-gradient(180deg, var(--abyss) 0%, var(--deep) 100%); padding: 80px 40px;">
+        <h2>Building in Public: FATHOM as Client #1</h2>
+        
+        <p><strong>Every strategy we recommend? We've tested it on FATHOM first.</strong></p>
+        
+        <p>Our own website is our laboratory. We publish the playbook, share real data, and show you exactly what works (and what doesn't).</p>
+
+        <div class="highlight-box">
+            <h3>Our Journey (Real Numbers)</h3>
+            <ul>
+                <li><strong>Month 0 (January 2026):</strong> Domain registered, 1 page, 0 traffic, 0 rankings</li>
+                <li><strong>Month 1-2:</strong> 18 blog posts, 50-100 visitors, first rankings appearing (positions 20-50)</li>
+                <li><strong>Month 3-4:</strong> 35+ posts, 250-500 visitors, 10+ page 1 rankings, first inbound leads</li>
+                <li><strong>Month 5-6:</strong> 60+ posts, 1,000+ visitors, 25+ page 1 rankings, real revenue from organic</li>
+                <li><strong>Month 6+:</strong> 80-100+ posts (projected), 1,500-2,500+ visitors, category authority established</li>
+            </ul>
+        </div>
+
+        <p><strong>We share everything:</strong> Real Google Analytics data, ranking progress, revenue attribution, strategic pivots, and honest failures. No smoke. No mirrors. Just receipts.</p>
+
+        <p>If we can't make SEO work for ourselves, we have no business selling it to you.</p>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section class="philosophy-section">
+        <div class="philosophy-content">
+            <h2 class="section-title">Our Philosophy</h2>
+            
+            <div class="philosophy-grid">
+                <div class="philosophy-item">
+                    <div class="philosophy-number">1</div>
+                    <h3>Go Deeper Than Everyone Else</h3>
+                    <p>Surface-level tactics get surface-level results. Most agencies stop at 50 meters. We descend to 500 meters: market domination strategies, competitive intelligence systems, full-spectrum technical mastery, authority engineering.</p>
+                </div>
+
+                <div class="philosophy-item">
+                    <div class="philosophy-number">2</div>
+                    <h3>Strategy First, Tactics Second</h3>
+                    <p>We don't optimize in isolation. Every SEO decision aligns with your business goals: revenue, market position, sustainable growth. We speak the language of CAC, LTV, payback periods, and market capture.</p>
+                </div>
+
+                <div class="philosophy-item">
+                    <div class="philosophy-number">3</div>
+                    <h3>Radical Transparency</h3>
+                    <p>Open pricing. Real data published monthly. Honest timelines (SEO takes 3-6 months). Clear reporting. Transparency builds trust. Trust builds partnerships. Partnerships win markets.</p>
+                </div>
+
+                <div class="philosophy-item">
+                    <div class="philosophy-number">4</div>
+                    <h3>AI-Powered, Human-Perfected</h3>
+                    <p>We use AI to scale (research 100 keywords in minutes, draft content briefs 10x faster), but every deliverable passes through expert human strategists who add original insights and ensure quality.</p>
+                </div>
+
+                <div class="philosophy-item">
+                    <div class="philosophy-number">5</div>
+                    <h3>Results, Not Reports</h3>
+                    <p>We're measured by one thing: Did we move your business forward? Not vanity metrics, not activity theater. Organic revenue growth. Qualified leads generated. Market position improved. Competitive advantages created.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values-section">
+        <h2 class="section-title">Our Values</h2>
+        
+        <div class="values-grid">
+            <div class="value-item">
+                <div class="value-icon">⚡</div>
+                <div class="value-content">
+                    <h3>Excellence Over Ease</h3>
+                    <p>We could deliver mediocre SEO and still get paid. We choose relentless excellence instead. Every post refined until it's better than the competition. Every strategy stress-tested until it's bulletproof.</p>
+                </div>
+            </div>
+
+            <div class="value-item">
+                <div class="value-icon">💎</div>
+                <div class="value-content">
+                    <h3>Honesty Over Hype</h3>
+                    <p>SEO isn't magic. It's hard work, smart strategy, and time. We'll tell you what's realistic, what's possible, and what's a waste of money. No bullshit.</p>
+                </div>
+            </div>
+
+            <div class="value-item">
+                <div class="value-icon">🤝</div>
+                <div class="value-content">
+                    <h3>Partnership Over Transactions</h3>
+                    <p>We're not order-takers executing your checklist. We're strategic partners challenging your assumptions, proposing better approaches, and winning together.</p>
+                </div>
+            </div>
+
+            <div class="value-item">
+                <div class="value-icon">🌱</div>
+                <div class="value-content">
+                    <h3>Long-Term Over Short-Term</h3>
+                    <p>We're not here for quick wins and churn. We build strategies that compound for years. Our best clients stay for 2-3+ years because we keep delivering.</p>
+                </div>
+            </div>
+
+            <div class="value-item">
+                <div class="value-icon">🔓</div>
+                <div class="value-content">
+                    <h3>Transparent Over Secretive</h3>
+                    <p>We share our methods, data, and lessons openly. Competitors can see our playbook—good luck executing it with our depth.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journey Section -->
+    <section class="journey-section">
+        <div class="journey-content">
+            <h2 class="section-title">What We're Building Toward</h2>
+            
+            <div class="story-section" style="padding: 0;">
+                <p style="text-align: center; font-size: 1.25rem; margin-bottom: 60px;"><strong>In 5 years, we want FATHOM to be known as the agency that proved SEO works by doing it themselves first, made radical transparency the industry standard, and helped 100+ companies dominate their markets.</strong></p>
+            </div>
+
+            <h3 style="text-align: center; font-size: 1.5rem; margin-bottom: 40px; color: var(--glow);">The Mission (Next 12 Months)</h3>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">Goal 1</div>
+                    <div class="timeline-title">Achieve 10,000+ monthly organic visitors on FATHOM</div>
+                    <div class="timeline-description">Proof of concept at scale—showing we can do for ourselves what we promise clients.</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Goal 2</div>
+                    <div class="timeline-title">Help 20-30 clients achieve 250%+ organic growth</div>
+                    <div class="timeline-description">Real results for real businesses across diverse industries and competitive landscapes.</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Goal 3</div>
+                    <div class="timeline-title">Publish 200+ pieces of valuable SEO content</div>
+                    <div class="timeline-description">On our site and client sites—establishing thought leadership through action, not just words.</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Goal 4</div>
+                    <div class="timeline-title">Build the most transparent case study library in SEO</div>
+                    <div class="timeline-description">Real data, real results, real client names (with permission)—no vague "ecommerce client" nonsense.</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Goal 5</div>
+                    <div class="timeline-title">Establish FATHOM as the thought leader in strategic SEO</div>
+                    <div class="timeline-description">Not just tactics, but strategy that transforms market position and builds competitive moats.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Ready to Go Deeper?</h2>
+            <p>Most agencies will tell you what you want to hear. We'll tell you what you need to know. Most agencies will promise fast results. We'll deliver sustainable dominance. Most agencies will hide their methods. We'll show you exactly how we work.</p>
+            <a href="/contact.html" class="cta-button">Book Discovery Call →</a>
+            <a href="/pricing.html" class="cta-button cta-button-secondary">View Our Pricing →</a>
+        </div>
+    </section>
+</body>
+</html>
