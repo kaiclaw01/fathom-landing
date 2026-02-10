@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - FATHOM Agency | Get in Touch</title>
+    <meta name="description" content="Ready to dive deeper? Let's discuss how FATHOM can help your business dominate your market. Elite SEO and digital marketing services.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    
+    <!-- Canonical -->
+    <link rel="canonical" href="https://thefathom.agency/contact.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Contact FATHOM Agency">
+    <meta property="og:description" content="Ready to dive deeper? Let's discuss how we can help your business dominate.">
+    <meta property="og:url" content="https://thefathom.agency/contact.html">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Contact FATHOM">
+    <meta name="twitter:description" content="Elite SEO & marketing services. Let's talk.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --deep: #0B3142;
+            --abyss: #030B10;
+            --glow: #00F5D4;
+            --white: #FFFFFF;
+            --font: 'Space Grotesk', sans-serif;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--font);
+            background: var(--abyss);
+            color: var(--white);
+            line-height: 1.6;
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(3, 11, 16, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 245, 212, 0.1);
+        }
+        
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+        
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--glow);
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 40px 80px;
+        }
+        
+        .contact-container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: linear-gradient(180deg, var(--white) 0%, var(--glow) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            font-size: 1.25rem;
+            opacity: 0.8;
+            margin-bottom: 48px;
+            line-height: 1.8;
+        }
+        
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 40px;
+            background: var(--glow);
+            color: var(--abyss);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.125rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 245, 212, 0.3);
+        }
+        
+        .cta-button svg {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 80px;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--glow);
+            margin-bottom: 8px;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.7;
+        }
+        
+        /* Email Option */
+        .email-option {
+            margin-top: 60px;
+            padding-top: 60px;
+            border-top: 1px solid rgba(0, 245, 212, 0.1);
+        }
+        
+        .email-option h2 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            color: var(--white);
+        }
+        
+        .email-link {
+            color: var(--glow);
+            text-decoration: none;
+            font-size: 1.25rem;
+            font-weight: 600;
+            transition: opacity 0.3s;
+        }
+        
+        .email-link:hover {
+            opacity: 0.8;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav {
+                padding: 16px 20px;
+            }
+            
+            .nav-links {
+                gap: 20px;
+            }
+            
+            .contact-section {
+                padding: 100px 20px 60px;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.125rem;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="/" class="nav-logo">FATHOM</a>
+        <div class="nav-links">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/blog.html" class="nav-link">Blog</a>
+            <a href="/contact.html" class="nav-link active">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="contact-container">
+            <h1>Ready to Dive Deeper?</h1>
+            <p class="subtitle">
+                Most agencies scratch the surface. We go deeper—from Core Web Vitals to market domination. 
+                If you're ready to build something that lasts, let's talk.
+            </p>
+            
+            <button class="cta-button" id="openModal">
+                <span>Start the Conversation</span>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+            </button>
+            
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value">500%</div>
+                    <div class="stat-label">Avg. Traffic Growth</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">91/100</div>
+                    <div class="stat-label">Technical SEO Score</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">6 Mo</div>
+                    <div class="stat-label">To Market Dominance</div>
+                </div>
+            </div>
+            
+            <div class="email-option">
+                <h2>Prefer Email?</h2>
+                <a href="mailto:hello@thefathom.agency" class="email-link">hello@thefathom.agency</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal (copied from homepage) -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-container">
+            <button class="modal-close" id="closeModal">×</button>
+            
+            <div class="modal-step" data-step="1">
+                <h2>Let's start with your name</h2>
+                <p class="modal-subtitle">What should we call you?</p>
+                <input type="text" id="userName" placeholder="Your name" class="modal-input">
+                <button class="modal-button" onclick="nextStep(2)">Continue →</button>
+            </div>
+            
+            <div class="modal-step" data-step="2">
+                <h2>What's your company?</h2>
+                <p class="modal-subtitle">Who are we diving with?</p>
+                <input type="text" id="userCompany" placeholder="Company name" class="modal-input">
+                <div class="modal-buttons">
+                    <button class="modal-button-secondary" onclick="prevStep(1)">← Back</button>
+                    <button class="modal-button" onclick="nextStep(3)">Continue →</button>
+                </div>
+            </div>
+            
+            <div class="modal-step" data-step="3">
+                <h2>What do you need help with?</h2>
+                <p class="modal-subtitle">Select all that apply</p>
+                <div class="form-options">
+                    <div class="form-option" data-value="seo">SEO Strategy</div>
+                    <div class="form-option" data-value="technical">Technical SEO</div>
+                    <div class="form-option" data-value="content">Content Marketing</div>
+                    <div class="form-option" data-value="links">Link Building</div>
+                    <div class="form-option" data-value="local">Local SEO</div>
+                    <div class="form-option" data-value="other">Something Else</div>
+                </div>
+                <div class="modal-buttons">
+                    <button class="modal-button-secondary" onclick="prevStep(2)">← Back</button>
+                    <button class="modal-button" onclick="nextStep(4)">Continue →</button>
+                </div>
+            </div>
+            
+            <div class="modal-step" data-step="4">
+                <h2>What's your biggest challenge?</h2>
+                <p class="modal-subtitle">Help us understand where you're stuck</p>
+                <textarea id="userChallenge" placeholder="Tell us what's keeping you up at night..." class="modal-textarea"></textarea>
+                <div class="modal-buttons">
+                    <button class="modal-button-secondary" onclick="prevStep(3)">← Back</button>
+                    <button class="modal-button" onclick="nextStep(5)">Continue →</button>
+                </div>
+            </div>
+            
+            <div class="modal-step" data-step="5">
+                <h2>Last step—your email</h2>
+                <p class="modal-subtitle">Where should we send our response?</p>
+                <input type="email" id="userEmail" placeholder="your@email.com" class="modal-input">
+                <div class="modal-buttons">
+                    <button class="modal-button-secondary" onclick="prevStep(4)">← Back</button>
+                    <button class="modal-button" onclick="nextStep(6)">Dive In →</button>
+                </div>
+            </div>
+            
+            <div class="modal-step" data-step="6">
+                <div class="modal-success">
+                    <div class="success-icon">✓</div>
+                    <h2>Welcome to the depths, <span id="confirmedName">friend</span></h2>
+                    <p>We'll be in touch within 24 hours. In the meantime, explore our journey on the blog.</p>
+                    <a href="/blog.html" class="modal-button">Read Our Story →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Modal Styles (from homepage) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(3, 11, 16, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+        
+        .modal-container {
+            background: var(--deep);
+            border: 1px solid rgba(0, 245, 212, 0.2);
+            border-radius: 16px;
+            max-width: 600px;
+            width: 100%;
+            padding: 48px;
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+        
+        .modal-close:hover {
+            opacity: 1;
+        }
+        
+        .modal-step {
+            display: none;
+        }
+        
+        .modal-step.active {
+            display: block;
+        }
+        
+        .modal-step h2 {
+            font-size: 2rem;
+            margin-bottom: 12px;
+            color: var(--white);
+        }
+        
+        .modal-subtitle {
+            opacity: 0.7;
+            margin-bottom: 32px;
+        }
+        
+        .modal-input,
+        .modal-textarea {
+            width: 100%;
+            padding: 16px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 245, 212, 0.2);
+            border-radius: 8px;
+            color: var(--white);
+            font-family: var(--font);
+            font-size: 1rem;
+            margin-bottom: 24px;
+        }
+        
+        .modal-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .modal-input:focus,
+        .modal-textarea:focus {
+            outline: none;
+            border-color: var(--glow);
+        }
+        
+        .modal-button {
+            width: 100%;
+            padding: 16px;
+            background: var(--glow);
+            color: var(--abyss);
+            border: none;
+            border-radius: 8px;
+            font-family: var(--font);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .modal-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 245, 212, 0.3);
+        }
+        
+        .modal-button-secondary {
+            padding: 16px;
+            background: transparent;
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            font-family: var(--font);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .modal-button-secondary:hover {
+            border-color: var(--glow);
+            color: var(--glow);
+        }
+        
+        .modal-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        
+        .form-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        
+        .form-option {
+            padding: 16px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 245, 212, 0.2);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .form-option:hover {
+            border-color: var(--glow);
+            background: rgba(0, 245, 212, 0.1);
+        }
+        
+        .form-option.selected {
+            background: var(--glow);
+            color: var(--abyss);
+            border-color: var(--glow);
+        }
+        
+        .modal-success {
+            text-align: center;
+        }
+        
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--glow);
+            color: var(--abyss);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 0 auto 24px;
+        }
+        
+        @media (max-width: 768px) {
+            .modal-container {
+                padding: 32px 24px;
+            }
+            
+            .form-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <script>
+        // Modal functionality (from homepage)
+        const modalOverlay = document.getElementById('modalOverlay');
+        const openModalBtn = document.getElementById('openModal');
+        const closeModalBtn = document.getElementById('closeModal');
+        let selectedNeeds = [];
+
+        openModalBtn.addEventListener('click', () => {
+            modalOverlay.classList.add('active');
+            showStep(1);
+        });
+
+        closeModalBtn.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                closeModal();
+            }
+        });
+
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+            setTimeout(() => {
+                showStep(1);
+                document.getElementById('userName').value = '';
+                document.getElementById('userCompany').value = '';
+                document.getElementById('userChallenge').value = '';
+                document.getElementById('userEmail').value = '';
+                selectedNeeds = [];
+                document.querySelectorAll('.form-option').forEach(opt => opt.classList.remove('selected'));
+            }, 300);
+        }
+
+        function showStep(step) {
+            document.querySelectorAll('.modal-step').forEach(s => s.classList.remove('active'));
+            document.querySelector(`.modal-step[data-step="${step}"]`).classList.add('active');
+        }
+
+        async function nextStep(step) {
+            if (step === 6) {
+                const email = document.getElementById('userEmail').value.trim();
+                if (!email || !email.includes('@')) {
+                    alert('Please enter a valid email');
+                    document.getElementById('userEmail').focus();
+                    return;
+                }
+                
+                const name = document.getElementById('userName').value.trim() || 'friend';
+                document.getElementById('confirmedName').textContent = name;
+                
+                try {
+                    const formData = {
+                        name: document.getElementById('userName').value.trim(),
+                        company: document.getElementById('userCompany').value.trim(),
+                        needs: selectedNeeds,
+                        challenge: document.getElementById('userChallenge').value.trim(),
+                        email: email
+                    };
+                    
+                    const response = await fetch('/api/submit', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(formData)
+                    });
+                    
+                    if (!response.ok) {
+                        console.error('Submission failed');
+                    }
+                } catch (error) {
+                    console.error('Submission error:', error);
+                }
+            }
+            
+            showStep(step);
+        }
+
+        function prevStep(step) {
+            showStep(step);
+        }
+
+        document.querySelectorAll('.form-option').forEach(option => {
+            option.addEventListener('click', () => {
+                option.classList.toggle('selected');
+                const value = option.dataset.value;
+                if (selectedNeeds.includes(value)) {
+                    selectedNeeds = selectedNeeds.filter(n => n !== value);
+                } else {
+                    selectedNeeds.push(value);
+                }
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
