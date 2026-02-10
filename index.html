@@ -97,6 +97,7 @@
 
         html {
             font-size: 16px;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -1854,6 +1855,18 @@
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
                 closeModal();
+            }
+        });
+
+        // Handle hash scrolling on page load (for links from blog page)
+        window.addEventListener('load', () => {
+            if (window.location.hash) {
+                const target = document.querySelector(window.location.hash);
+                if (target) {
+                    setTimeout(() => {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 100);
+                }
             }
         });
     </script>
