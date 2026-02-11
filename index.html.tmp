@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MP7RP9SGB9"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-MP7RP9SGB9');
-    </script>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FATHOM - Elite SEO & Digital Marketing Agency | 500% Traffic Growth</title>
@@ -1757,6 +1748,117 @@
             }
         });
 
+        // ============================================
+        // MODAL LOGIC
+        // ============================================
+        const modalOverlay = document.getElementById('modalOverlay');
+        const openModalBtn = document.getElementById('openModal');
+        const closeModalBtn = document.getElementById('modalClose');
+        let currentStep = 1;
+        let selectedNeeds = [];
+
+        // Open modal
+        openModalBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Close modal
+        closeModalBtn.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) closeModal();
+        });
+
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+            // Reset to step 1 after animation
+            setTimeout(() => {
+                showStep(1);
+            }, 500);
+        }
+
+        // Step navigation
+        function showStep(step) {
+            document.querySelectorAll('.modal-step').forEach(s => s.classList.remove('active'));
+            document.querySelector(`.modal-step[data-step="${step}"]`).classList.add('active');
+            currentStep = step;
+        }
+
+        async function nextStep(step) {
+            // Validation
+            if (currentStep === 1) {
+                const name = document.getElementById('userName').value.trim();
+                if (!name) {
+                    document.getElementById('userName').focus();
+                    return;
+                }
+            }
+            
+            if (currentStep === 3) {
+                const email = document.getElementById('userEmail').value.trim();
+                if (!email || !email.includes('@')) {
+                    document.getElementById('userEmail').focus();
+                    return;
+                }
+                
+                // Set confirmed name
+                const name = document.getElementById('userName').value.trim() || 'friend';
+                document.getElementById('confirmedName').textContent = name;
+                
+                // Submit form data to API
+                try {
+                    const formData = {
+                        name: document.getElementById('userName').value.trim(),
+                        company: document.getElementById('userCompany').value.trim(),
+                        needs: selectedNeeds,
+                        challenge: document.getElementById('userChallenge').value.trim(),
+                        email: email
+                    };
+                    
+                    const response = await fetch('/api/submit', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(formData)
+                    });
+                    
+                    if (!response.ok) {
+                        console.error('Submission failed');
+                    }
+                } catch (error) {
+                    console.error('Submission error:', error);
+                    // Continue anyway - don't block the user
+                }
+            }
+            
+            showStep(step);
+        }
+
+        function prevStep(step) {
+            showStep(step);
+        }
+
+        // Form options selection
+        document.querySelectorAll('.form-option').forEach(option => {
+            option.addEventListener('click', () => {
+                option.classList.toggle('selected');
+                const value = option.dataset.value;
+                if (selectedNeeds.includes(value)) {
+                    selectedNeeds = selectedNeeds.filter(n => n !== value);
+                } else {
+                    selectedNeeds.push(value);
+                }
+            });
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+                closeModal();
+            }
+        });
+
         // Handle hash scrolling on page load (for links from blog page)
         window.addEventListener('load', () => {
             if (window.location.hash) {
@@ -1771,3 +1873,4 @@
     </script>
 </body>
 </html>
+
