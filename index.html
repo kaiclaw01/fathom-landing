@@ -1208,7 +1208,16 @@
             </div>
             <span class="logo-text">Fathom</span>
         </a>
-        <div style="display: flex; align-items: center; gap: 24px;">
+        
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        
+        <!-- Desktop Nav Links -->
+        <div class="nav-links" id="navLinks">
             <a href="/services.html" style="color: var(--white); text-decoration: none; font-weight: 500; font-size: 0.95rem; letter-spacing: 0.05em; transition: color 0.3s ease;">Services</a>
             <a href="/process.html" style="color: var(--white); text-decoration: none; font-weight: 500; font-size: 0.95rem; letter-spacing: 0.05em; transition: color 0.3s ease;">Process</a>
             <a href="/about.html" style="color: var(--white); text-decoration: none; font-weight: 500; font-size: 0.95rem; letter-spacing: 0.05em; transition: color 0.3s ease;">About</a>
@@ -1772,6 +1781,33 @@
                 }
             }
         });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        if (mobileMenuBtn && navLinks) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenuBtn.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+            
+            // Close menu when clicking a link
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenuBtn.classList.remove('active');
+                    navLinks.classList.remove('active');
+                });
+            });
+            
+            // Close menu when clicking overlay
+            navLinks.addEventListener('click', (e) => {
+                if (e.target === navLinks) {
+                    mobileMenuBtn.classList.remove('active');
+                    navLinks.classList.remove('active');
+                }
+            });
+        }
     </script>
 </body>
 </html>
