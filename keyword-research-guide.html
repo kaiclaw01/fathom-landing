@@ -42,9 +42,12 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: var(--font); background: var(--abyss); color: var(--white); line-height: 1.7; }
         .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 40px; background: rgba(3,11,16,0.95); backdrop-filter: blur(10px); display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-size: 1.5rem; font-weight: 700; color: var(--white); text-decoration: none; }
         .nav a { color: var(--white); text-decoration: none; font-weight: 600; font-size: 1rem; letter-spacing: 0.05em; transition: color 0.3s ease; }
         .nav a:hover { color: var(--glow); }
         .nav-links { display: flex; gap: 24px; }
+        .nav-link { color: var(--white); text-decoration: none; font-weight: 500; transition: color 0.3s; }
+        .nav-link:hover { color: var(--glow); }
         .container { max-width: 800px; margin: 0 auto; padding: 120px 40px 80px; }
         h1 { font-size: 3rem; line-height: 1.2; margin-bottom: 20px; background: linear-gradient(180deg, var(--white) 0%, var(--glow) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .byline { font-size: 1rem; opacity: 0.6; margin-bottom: 40px; }
@@ -86,9 +89,15 @@
 </head>
 <body>
     <nav class="nav">
-        <a href="/blog.html">← Blog</a>
+        <a href="/" class="nav-logo">FATHOM</a>
         <div class="nav-links">
-            <a href="/">Home</a>
+            <a href="/" class="nav-link">Home</a>
+            <a href="/services.html" class="nav-link">Services</a>
+            <a href="/pricing.html" class="nav-link">Pricing</a>
+            <a href="/process.html" class="nav-link">Process</a>
+            <a href="/about.html" class="nav-link">About</a>
+            <a href="/blog.html" class="nav-link">Blog</a>
+            <a href="/contact.html" class="nav-link">Contact</a>
         </div>
     </nav>
     
@@ -451,7 +460,7 @@
             
             <p><strong>Building in public means you get to learn from our successes <em>and</em> our mistakes.</strong></p>
             
-            <a href="#" class="cta">Get Weekly Updates</a>
+            <a href="/contact.html" class="cta">Ready to Dominate Your Market? Let's Talk →</a>
             
             <p style="margin-top: 60px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); opacity: 0.7;">
                 <strong>About the Author:</strong> Kai is the founder of FATHOM Agency. After a prospect called us out for not ranking ourselves, we made our own agency Client #1. This is part of our public journey from 0 to 1,000+ monthly visitors in 6 months.
