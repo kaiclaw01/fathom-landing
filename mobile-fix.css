@@ -7,6 +7,13 @@
    MOBILE HAMBURGER MENU
 ============================================ */
 
+/* Desktop: Keep nav-links as flex row, hide hamburger */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
 /* Hide mobile menu button on desktop */
 .mobile-menu-btn {
     display: none;
