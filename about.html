@@ -528,16 +528,25 @@
     <!-- Navigation -->
     <nav class="nav">
         <a href="/" class="nav-logo">FATHOM</a>
-        <div class="nav-links">
+        
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        
+        <div class="nav-links" id="navLinks">
             <a href="/" class="nav-link">Home</a>
             <a href="/services.html" class="nav-link">Services</a>
-
             <a href="/process.html" class="nav-link">Process</a>
             <a href="/about.html" class="nav-link" style="color: var(--glow);">About</a>
             <a href="/blog.html" class="nav-link">Blog</a>
             <a href="/contact.html" class="nav-link">Contact</a>
         </div>
     </nav>
+    
+    <script src="/mobile-menu.js"></script>
 
     <!-- Hero Section -->
     <section class="hero">
